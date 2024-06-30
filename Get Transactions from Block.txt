@@ -1,0 +1,3 @@
+block_number = latest_block['number']
+block = web3.eth.get_block(block_number, full_transactions=True)
+transactions = block['transactions']

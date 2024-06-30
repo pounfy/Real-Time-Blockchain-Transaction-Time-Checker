@@ -1,0 +1,27 @@
+def main():
+    while True:
+        choice = input("Enter '1' to check latest transaction times, 'q' to quit: ")
+        if choice == '1':
+            latest_block = web3.eth.get_block('latest')
+            block_number = latest_block['number']
+            block = web3.eth.get_block(block_number, full_transactions=True)
+            transactions = block['transactions']
+            
+            current_time = datetime.datetime.utcnow()
+            block_time = datetime.datetime.utcfromtimestamp(block['timestamp'])
+            transaction_times = []
+
+            for tx in transactions:
+                tx_time = current_time - block_time
+                transaction_times.append((tx['hash'].hex(), tx_time))
+
+            for tx_hash, tx_time in transaction_times:
+                print(f"Transaction {tx_hash} took {tx_time}")
+
+        elif choice == 'q':
+            break
+        else:
+            print("Invalid choice, please try again.")
+
+if __name__ == "__main__":
+    main()

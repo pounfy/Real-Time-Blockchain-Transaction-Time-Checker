@@ -1,0 +1,17 @@
+import pandas as pd
+
+tx_data = []
+for tx in transactions:
+    tx_info = {
+        'hash': tx['hash'].hex(),
+        'from': tx['from'],
+        'to': tx['to'],
+        'value': tx['value'],
+        'gas': tx['gas'],
+        'gasPrice': tx['gasPrice'],
+        'time': block_time
+    }
+    tx_data.append(tx_info)
+
+df = pd.DataFrame(tx_data)
+print(df.head())

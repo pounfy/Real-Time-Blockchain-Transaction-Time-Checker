@@ -1,0 +1,10 @@
+from web3 import Web3
+
+# Connect to the Base network
+infura_url = "YOUR_INFURA_PROJECT_URL"
+web3 = Web3(Web3.HTTPProvider(infura_url))
+
+if web3.isConnected():
+    print("Connected to Base network")
+else:
+    print("Failed to connect to Base network")

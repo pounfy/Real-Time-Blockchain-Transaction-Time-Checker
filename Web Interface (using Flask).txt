@@ -1,0 +1,26 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/transactions', methods=['GET'])
+def get_transactions():
+    latest_block = web3.eth.get_block('latest')
+    block_number = latest_block['number']
+    block = web3.eth.get_block(block_number, full_transactions=True)
+    transactions = block['transactions']
+
+    current_time = datetime.datetime.utcnow()
+    block_time = datetime.datetime.utcfromtimestamp(block['timestamp'])
+    transaction_times = []
+
+    for tx in transactions:
+        tx_time = current_time - block_time
+        transaction_times.append({
+            'hash': tx['hash'].hex(),
+            'transaction_time': str(tx_time)
+        })
+
+    return jsonify(transaction_times)
+
+if __name__ == "__main__":
+    app.run(debug=True)

@@ -1,0 +1,7 @@
+import datetime
+
+current_time = datetime.datetime.utcnow()
+block_time = datetime.datetime.utcfromtimestamp(block['timestamp'])
+transaction_time = current_time - block_time
+
+print(f"Transaction time: {transaction_time}")

@@ -1,0 +1,2 @@
+latest_block = web3.eth.get_block('latest')
+print(latest_block)

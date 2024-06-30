@@ -1,0 +1,2 @@
+df['transaction_time'] = current_time - df['time']
+print(df[['hash', 'transaction_time']])
